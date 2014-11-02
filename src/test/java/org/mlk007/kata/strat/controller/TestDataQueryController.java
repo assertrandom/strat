@@ -54,4 +54,22 @@ public class TestDataQueryController {
 			LOGGER.debug("content().toString() {}", content().toString());
 	}
 
+	@Test
+	public void testCallWithoutZoomFactor() throws Exception {
+			ResultActions result = mockMvc.perform(get("/pageinfo?page=work&size=1"));
+			result.andExpect(status().is4xxClientError());
+	}	
+	
+	@Test
+	public void testCallWithoutPage() throws Exception {
+			ResultActions result = mockMvc.perform(get("/pageinfo?size=12&zoomfactor=121"));
+			result.andExpect(status().is4xxClientError());
+	}		
+	
+	@Test
+	public void testCallWithoutSize() throws Exception {
+			ResultActions result = mockMvc.perform(get("/pageinfo?page=work&zoomfactor=121"));
+			result.andExpect(status().is4xxClientError());
+	}			
+	
 }
