@@ -14,16 +14,9 @@ public class BlackListWord {
 		return replacementWord;
 	}
 
-	public void setReplacementWord(String replacementWord) {
-		this.replacementWord = replacementWord;
-	}
-
 	public String getBlacklistWord() {
 		return blacklistWord;
 	}
 
-	public void setBlacklistWord(String blacklistWord) {
-		this.blacklistWord = blacklistWord;
-	}
 
 }

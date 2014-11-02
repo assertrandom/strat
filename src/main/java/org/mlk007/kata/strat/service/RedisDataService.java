@@ -14,18 +14,17 @@ import redis.clients.jedis.Jedis;
 public class RedisDataService implements DataService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RedisDataService.class);
-	
+
 	private Jedis jedis;
-	
+
 	@Value("${redis.host}")
-	private String redisHost;	
-	
-	
+	private String redisHost;
+
 	@Override
 	public String getDataFromStore(String pageNum, String size, String zoomFactor) {
-		return jedis.get("page-"+pageNum);
+		return jedis.get("page-" + pageNum);
 	}
-	
+
 	@PostConstruct
 	public void initiaiteRedisConnection() {
 		LOGGER.debug("Initiate connection to Redis Post Construction {}", redisHost);
@@ -39,13 +38,13 @@ public class RedisDataService implements DataService {
 		jedis.set("page-03", "That is for Mr President");
 		jedis.set("page-04", "That car is a sedan");
 		jedis.set("page-05", "Incredible journey of voyager");
-		
-	}	
-	
+
+	}
+
 	@PreDestroy
 	public void closeRedisConnection() {
 		LOGGER.debug("Close connection to Redis ");
 		jedis.close();
-	}	
+	}
 
 }

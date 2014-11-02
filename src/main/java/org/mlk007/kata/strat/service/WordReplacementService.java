@@ -16,24 +16,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WordReplacementService {
-	
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(WordReplacementService.class);
 
 	private List<BlackListWord> blacklistWordList = new ArrayList<BlackListWord>();
 
 	private String[] blockedWordsArray;
 	private String[] replacementWordsArray;
-	
+
 	@Autowired
-    Properties blockedwords;
+	Properties blockedwords;
 
 	@PostConstruct
 	private void populateReplacementWord() {
 		LOGGER.debug("blockedwords.size()  {}", blockedwords.size());
-		for (Entry<Object, Object> entry: blockedwords.entrySet()) {
-			LOGGER.debug("entry.getKey()  {} {} ", entry.getKey()  ,entry.getValue());
-			blacklistWordList.add(new BlackListWord((String)entry.getKey(), (String)entry.getValue()));
+		for (Entry<Object, Object> entry : blockedwords.entrySet()) {
+			LOGGER.debug("entry.getKey()  {} {} ", entry.getKey(), entry.getValue());
+			blacklistWordList.add(new BlackListWord((String) entry.getKey(), (String) entry.getValue()));
 		}
 		populateReplacementWords(blacklistWordList);
 	}

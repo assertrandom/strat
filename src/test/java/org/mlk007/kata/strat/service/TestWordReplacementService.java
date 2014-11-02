@@ -18,10 +18,10 @@ public class TestWordReplacementService {
 
 	@Autowired
 	WordReplacementService wordReplacementService;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 	}
 
 	@After
@@ -31,12 +31,13 @@ public class TestWordReplacementService {
 	@Test
 	public void testWordreplacementServicePostConstruct() {
 		assertNotNull(wordReplacementService.getReplacementWordsArray());
-		assertEquals(wordReplacementService.getReplacementWordsArray().length, wordReplacementService.getBlockedWordsArray().length);
+		assertEquals(wordReplacementService.getReplacementWordsArray().length,
+				wordReplacementService.getBlockedWordsArray().length);
 	}
-	
+
 	@Test
 	public void testWordReplacement() throws Exception {
-		
+
 	}
 
 }

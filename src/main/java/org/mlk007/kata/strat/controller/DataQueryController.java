@@ -21,35 +21,34 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class DataQueryController {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataQueryController.class);
-	
+
 	@Autowired
 	DataService redisDataService;
-	
+
 	@Autowired
 	WordReplacementService wordReplacementService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		LOGGER.debug("Root context");
 		return "home";
 	}
-	
-	@RequestMapping(value="/pageinfo", method=RequestMethod.GET, produces = {
-            MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public String getPageInfo(@RequestParam(value="page") String page, 
-			@RequestParam(value="size") String size, 
-			@RequestParam(value="zoomfactor") String zoomfactor,
-			HttpServletRequest request, HttpServletResponse response) {
-				//Code to fetch client IP 
-				LOGGER.debug("The service was accessed from {} ", request.getRemoteAddr());
-				
-				String dataFromStore = redisDataService.getDataFromStore(page, size, zoomfactor);
-				if (StringUtils.isEmpty(dataFromStore)) 
-					return "No matching entry for the page " +page+ " size "+size+ " zoomfactor " + zoomfactor;
-				return wordReplacementService.processAndReplaceWords(dataFromStore);
-		
+
+	@RequestMapping(value = "/pageinfo", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public String getPageInfo(@RequestParam(value = "page") String page, @RequestParam(value = "size") String size,
+			@RequestParam(value = "zoomfactor") String zoomfactor, HttpServletRequest request,
+			HttpServletResponse response) {
+		// Code to fetch client IP
+		LOGGER.debug("The service was accessed from {} ", request.getRemoteAddr());
+
+		String dataFromStore = redisDataService.getDataFromStore(page, size, zoomfactor);
+		if (StringUtils.isEmpty(dataFromStore))
+			return "No matching entry for the page " + page + " size " + size + " zoomfactor " + zoomfactor;
+		return wordReplacementService.processAndReplaceWords(dataFromStore);
+
 	}
-	
+
 }
