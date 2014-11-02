@@ -16,6 +16,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 public class CSVReader {
+	
+	//Assumptions 
+	//Duration XX: XX  is taken as minutes : seconds 
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CSVReader.class);
 
@@ -62,10 +65,8 @@ public class CSVReader {
 			}
 			counter++;
 		}
-
 		br.close();
 		return totalSeconds;
-
 	}
 
 	// TODO - Add logic to check if minutes & hours is positive and less than 60

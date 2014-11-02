@@ -37,6 +37,9 @@ public class TestWordReplacementService {
 
 	@Test
 	public void testWordReplacement() throws Exception {
+		assertEquals(wordReplacementService.processAndReplaceWords("dollar"), "pound");
+		assertEquals(wordReplacementService.processAndReplaceWords("simple"), "simple");
+		assertEquals(wordReplacementService.processAndReplaceWords("sedan"), "saloon");
 
 	}
 
