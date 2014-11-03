@@ -18,12 +18,12 @@ public class QueueExecutor {
 
 		for (int i = 0; i < 40; i++) {
 			Thread pubThread = new Thread(publisher);
-			publisherService.submit(pubThread);
+			publisherService.execute(pubThread);
 		}
 
 		for (int i = 0; i < 40; i++) {
 			Thread consumerThread = new Thread(consumer);
-			consumerService.submit(consumerThread);
+			consumerService.execute(consumerThread);
 		}
 
 		publisherService.shutdown();
