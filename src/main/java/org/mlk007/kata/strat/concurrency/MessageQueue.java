@@ -19,11 +19,11 @@ public class MessageQueue {
 	}
 	
 	public synchronized String getAsString() throws InterruptedException {
-		if (messageQueue.size() == 0) {
-			LOGGER.debug(" {} Waiting for Queue population", Thread.currentThread().getName());
+		while (messageQueue.size() == 0) {
+			LOGGER.debug("****  Waiting for Queue population" );
 			wait();
 		}
-		LOGGER.debug( " {}  Returning String {}", Thread.currentThread().getName(), messageQueue.size());
+		LOGGER.debug( "Returning String {}", messageQueue.size());
 		
 		notifyAll();
 		
@@ -31,12 +31,12 @@ public class MessageQueue {
 	}
 	
 	public synchronized void store(String input) throws InterruptedException {
-		if (messageQueue.size() == maxSize ) {
-			LOGGER.debug(" {} Max size reached ",  Thread.currentThread().getName());
+		while (messageQueue.size() == maxSize ) {
+			LOGGER.debug("**** Max size reached "  );
 			wait();
 		}
 		notifyAll();
-		LOGGER.debug( "  {} Populating String {}" , Thread.currentThread().getName(), messageQueue.size());
+		LOGGER.debug( "Populating String {}" ,  messageQueue.size());
 		messageQueue.add(input);
 		
 		

@@ -21,8 +21,8 @@ public class MessageConsumer implements Runnable {
 		try {
 			for (int i = 0; i < 50; i++) {
 				messageQueue.getAsString();
-				Thread.sleep(10 * random.nextInt(10));
-//				Thread.sleep(5);
+				int millis = 10 * random.nextInt(10);
+				Thread.sleep(millis);
 			}
 		} catch (InterruptedException e) {
 			LOGGER.error("Exception ", e);

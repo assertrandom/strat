@@ -24,7 +24,8 @@ public class MessagePublisher implements Runnable {
 		try {
 			for (int i = 0; i < 50; i++) {
 				messageQueue.store(messageName);
-				Thread.sleep(10 * random.nextInt(10));
+				int millis = 10 * random.nextInt(10);
+				Thread.sleep(millis);
 
 			}
 		} catch (InterruptedException e) {
