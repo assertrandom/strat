@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,18 +30,16 @@ public class DataQueryController {
 	WordReplacementService wordReplacementService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		LOGGER.debug("Root context");
-		return "home";
+	public String home(HttpServletRequest request,
+			HttpServletResponse response) {
+		LOGGER.debug("Root context is accessed from {} ", request.getRemoteAddr());
+		return "Root context is accessed from "+ request.getRemoteAddr();
 	}
 
 	@RequestMapping(value = "/pageinfo", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public String getPageInfo(@RequestParam(value = "page") String page, @RequestParam(value = "size") String size,
-			@RequestParam(value = "zoomfactor") String zoomfactor, HttpServletRequest request,
-			HttpServletResponse response) {
-		// Code to fetch client IP
-		LOGGER.debug("The service was accessed from {} ", request.getRemoteAddr());
+			@RequestParam(value = "zoomfactor") String zoomfactor) {
 
 		String dataFromStore = redisDataService.getDataFromStore(page, size, zoomfactor);
 		if (StringUtils.isEmpty(dataFromStore))
