@@ -25,7 +25,7 @@ public class MessageQueue {
 		}
 		LOGGER.debug( "Returning String {}", messageQueue.size());
 		
-		notifyAll();
+		notify();
 		
 		return messageQueue.poll();
 	}
@@ -35,7 +35,7 @@ public class MessageQueue {
 			LOGGER.debug("**** Max size reached "  );
 			wait();
 		}
-		notifyAll();
+		notify();
 		LOGGER.debug( "Populating String {}" ,  messageQueue.size());
 		messageQueue.add(input);
 		
